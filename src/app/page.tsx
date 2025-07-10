@@ -10,15 +10,20 @@ import Footer from "@/components/layouts/Footer";
 
 export default function Home() {
   return (
-    <div className="px-32 mb-10" >
-      <Hero />
-      <Clients />
-      <Category/>
-      <BannerSignUp/>
-      <FeaturedJobs/>
-      <LatestJobs/>
-      <Footer/>
-      
-    </div>
+    <>
+      <div className="w-full h-screen absolute top-0 -z-10">
+        <Image src="/images/pattern.png" alt="/images/pattern.png" fill />
+      </div>
+      <div className="px-32 mb-10">
+        <Hero />
+        <Clients />
+        <Category />
+        <BannerSignUp />
+        <FeaturedJobs />
+        <LatestJobs />
+        <Footer />
+        
+      </div>
+    </>
   );
 }
