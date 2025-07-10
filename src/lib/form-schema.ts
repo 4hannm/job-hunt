@@ -4,9 +4,9 @@ export const formFilterSchema = z.object({
 	categories: z.array(z.string()),
 });
 
-// export const formFilterCompanySchema = z.object({
-// 	industry: z.array(z.string()),
-// });
+export const formFilterCompanySchema = z.object({
+	industry: z.array(z.string()),
+});
 
 // export const formApplySchema = z.object({
 // 	resume: z.any().refine((file: any) => file?.name, "Please upload Resume"),

@@ -70,10 +70,10 @@ const ExploreDataContainer: FC<ExploreDataContainerProps> = ({
         <div className="w-4/5">
           <div className="mb-8">
             <div className="text-3xl font-semibold">
-              All Jobs{/*type === "job" ? "Jobs" : "Companies"*/}
+              All{type === "job" ? "Jobs" : "Companies"}
             </div>
             <div className="text-muted-foreground">
-              Showing 73{/*data.length*/} Result
+              Showing {data.length} Result
             </div>
             <div className="grid gird-cols-1 gap-7">
               {loading ? (
@@ -89,7 +89,7 @@ const ExploreDataContainer: FC<ExploreDataContainerProps> = ({
                   ) : (
                     <div className="grid grid-cols-3 gap-5">
                       {data?.map((item: any, i: number) => (
-                        <div key={i}>Company Card</div>
+                        <CompanyCard key={i} {...item}/>
                         // <CompanyCard key={i} {...item} />
                       ))}
                     </div>
