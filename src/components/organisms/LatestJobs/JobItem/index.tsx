@@ -7,36 +7,54 @@ import React, { FC } from "react";
 interface JobItemProps extends JobType {}
 
 const JobItem: FC<JobItemProps> = ({
+  category,
+  desc,
   image,
   jobType,
   location,
   name,
   type,
-  skills = [], 
+  skills,
 }) => {
   return (
-    <div className="border border-border p-8 flex flex-row items-start gap-6 cursor-pointer">
-      <div>
-        <Image src={image} alt={image} width={64} height={64} />
+    <div className="border border-border p-6 cursor-pointer">
+      <div className="flex flex-row justify-between items-start">
+        <Image
+          src={
+            typeof image === "string" && image !== ""
+              ? image
+              : "/images/company.png"
+          }
+          alt="Company Logo"
+          width={48}
+          height={48}
+        />
+        <span className="px-4 py-1 rounded border text-xs font-semibold text-primary border-primary">
+          {jobType}
+        </span>
       </div>
-      <div>
-        <div className="text-lg font-semibold">{name}</div>
-        <div className="text-sm text-muted-foreground mb-2">
+
+      <div className="my-4">
+        <div className="font-semibold text-lg">{name}</div>
+        <div className="text-muted-foreground mb-3">
           {type} . {location}
         </div>
-        <div className="h-5 inline-flex gap-2 items-center">
-          <Badge variant="secondary">{jobType}</Badge>
-          <Separator orientation="vertical" />
-          {skills.slice(0, 2).map((item: string, i: number) => (
-            <Badge
-              key={item + i}
-              variant="outline"
-              className="rounded border-primary bg-primary/5 text-primary"
-            >
-              {item}
-            </Badge>
-          ))}
-        </div>
+        <div
+          className="text-muted-foreground h-12 line-clamp-2 text-ellipsis"
+          dangerouslySetInnerHTML={{ __html: desc }}
+        />
+      </div>
+
+      <div className="space-x-2">
+        {skills.map((item: string, i: number) => (
+          <Badge
+            key={item + i}
+            variant="outline"
+            className="rounded border-primary bg-primary/5 text-primary"
+          >
+            {item}
+          </Badge>
+        ))}
       </div>
     </div>
   );
