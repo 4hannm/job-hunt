@@ -37,21 +37,21 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
 
   const onSubmit = async (val: z.infer<typeof formSignInSchema>) => {
     console.log(val);
-    // const authenticated = await signIn("credentials", {
-    // 	...val,
-    // 	redirect: false,
-    // });
+    const authenticated = await signIn("credentials", {
+    	...val,
+    	redirect: false,
+    });
 
-    // if (authenticated?.error) {
-    // 	toast({
-    // 		title: "Error",
-    // 		description: "Email or password maybe wrong",
-    // 	});
+    if (authenticated?.error) {
+    	toast({
+    		title: "Error",
+    		description: "Email or password maybe wrong",
+    	});
 
-    // 	return;
-    // }
+    	return;
+    }
 
-    // router.push("/");
+    router.push("/");
   };
 
   return (

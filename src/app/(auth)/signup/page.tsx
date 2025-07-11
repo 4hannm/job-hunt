@@ -31,30 +31,30 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
     },
   });
 
-  // const { toast } = useToast();
-  // const router = useRouter();
+  const { toast } = useToast();
+  const router = useRouter();
 
   const onSubmit = async (val: z.infer<typeof formSignUpSchema>) => {
     console.log(val);
-    // try {
-    // 	await fetch("/api/user", {
-    // 		method: "POST",
-    // 		headers: { "Content-Type": "application/json" },
-    // 		body: JSON.stringify(val),
-    // 	});
+    try {
+    	await fetch("/api/user", {
+    		method: "POST",
+    		headers: { "Content-Type": "application/json" },
+    		body: JSON.stringify(val),
+    	});
 
-    // 	toast({
-    // 		title: "Success",
-    // 		description: "Create account success",
-    // 	});
+    	toast({
+    		title: "Success",
+    		description: "Create account success",
+    	});
 
-    // 	router.push("/signin");
-    // } catch (error) {
-    // 	toast({
-    // 		title: "Error",
-    // 		description: "Please try again",
-    // 	});
-    // }
+    	router.push("/signin");
+    } catch (error) {
+    	toast({
+    		title: "Error",
+    		description: "Please try again",
+    	});
+    }
   };
 
   return (

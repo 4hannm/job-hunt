@@ -4,6 +4,8 @@ import "../globals.css";
 import Image from "next/image";
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
+import { Toaster } from "@/components/ui/toaster";
+import AuthProvider from "@/providers/AuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,11 +30,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} relative `}>
-        <Navbar />
+        <AuthProvider>
+          <Navbar />
 
-        <main>{children}</main>
+          <main>{children}</main>
 
-        <Footer/>
+          <Footer />
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   );
