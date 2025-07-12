@@ -1,7 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -20,10 +25,10 @@ import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import UploadField from "../UploadField";
-// import { useSession } from "next-auth/react";
-// import { supabaseUploadFile } from "@/lib/supabase";
-// import { useToast } from "@/components/ui/use-toast";
-// import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { supabaseUploadFile } from "@/lib/supabase";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 interface FormModalApplyProps {
   image: string | undefined;
@@ -31,6 +36,7 @@ interface FormModalApplyProps {
   location: string | undefined;
   jobType: string | undefined;
   id: string | undefined;
+  isApply: number | undefined;
 }
 
 const FormModalApply: FC<FormModalApplyProps> = ({
@@ -39,6 +45,7 @@ const FormModalApply: FC<FormModalApplyProps> = ({
   location,
   roles,
   id,
+  isApply,
 }) => {
   const form = useForm<z.infer<typeof formApplySchema>>({
     resolver: zodResolver(formApplySchema),
@@ -54,76 +61,92 @@ const FormModalApply: FC<FormModalApplyProps> = ({
     },
   });
 
-  // const { toast } = useToast();
-  // const router = useRouter();
+  const { toast } = useToast();
+  const router = useRouter();
 
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
 
   const onSubmit = async (val: z.infer<typeof formApplySchema>) => {
-	console.log(val)
-    // try {
-    // 	const { filename, error } = await supabaseUploadFile(
-    // 		val.resume,
-    // 		"applicant"
-    // 	);
-    // 	const reqData = {
-    // 		userId: session?.user.id,
-    // 		jobId: id,
-    // 		resume: filename,
-    // 		coverLetter: val.coverLetter,
-    // 		linkedIn: val.linkedIn,
-    // 		phone: val.phone,
-    // 		portfolio: val.portfolio,
-    // 		previousJobTitle: val.previousJobTitle,
-    // 	};
-    // 	if (error) {
-    // 		throw "Error";
-    // 	}
-    // 	await fetch("/api/jobs/apply", {
-    // 		method: "POST",
-    // 		headers: { "Content-Type": "application/json" },
-    // 		body: JSON.stringify(reqData),
-    // 	});
-    // 	await toast({
-    // 		title: "Success",
-    // 		description: "Apply job success",
-    // 	});
-    // 	router.replace("/");
-    // } catch (error) {
-    // 	console.log(error);
-    // 	toast({
-    // 		title: "Error",
-    // 		description: "Please try again",
-    // 	});
-    // }
+    console.log(val);
+    try {
+      const { filename, error } = await supabaseUploadFile(
+        val.resume,
+        "applicant"
+      );
+      const reqData = {
+        userId: session?.user.id,
+        jobId: id,
+        resume: filename,
+        coverLetter: val.coverLetter,
+        linkedIn: val.linkedIn,
+        phone: val.phone,
+        portfolio: val.portfolio,
+        previousJobTitle: val.previousJobTitle,
+      };
+      if (error) {
+        throw "Error";
+      }
+      await fetch("/api/jobs/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reqData),
+      });
+      await toast({
+        title: "Success",
+        description: "Apply job success",
+      });
+      router.replace("/");
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Error",
+        description: "Please try again",
+      });
+    }
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="lg" className="text-lg px-12 py-6">
-          Apply
-        </Button>
+        {session ? (
+          <div>
+            {isApply === 1 ? (
+              <Button disabled className="text-lg px-12 py-6 bg-green-500">
+                Applied
+              </Button>
+            ) : (
+              <Button size="lg" className="text-lg px-12 py-6">
+                Apply
+              </Button>
+            )}
+          </div>
+        ) : (
+          <Button variant="outline" disabled>
+            Sign In First
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+        <DialogTitle>Apply for this job</DialogTitle>
         <div>
           <div className="inline-flex items-center gap-4">
             <div>
               <Image
-                src="/images/company2.png"
-                alt="/images/company2.png"
-                width={60}
-                height={60}
+                src={
+                  typeof image === "string" && image !== ""
+                    ? image
+                    : "/images/company.png"
+                }
+                alt={typeof image === "string" ? image : "Company logo"}
+                width={48}
+                height={48}
+                className="rounded"
               />
             </div>
             <div>
-              <div className="text-lg font-semibold">
-                {" "}
-                sosmed asistan{/*roles*/}
-              </div>
+              <div className="text-lg font-semibold">{roles}</div>
               <div className="text-gray-500">
-                Agency . paris, france . Fulltime
-                {/* {location} . {jobType} */}
+                {location} . {jobType}
               </div>
             </div>
           </div>

@@ -1,9 +1,9 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-// import dayjs from "dayjs";
+import dayjs from "dayjs";
 import bcrypt from "bcryptjs";
 import { supabaseGetPublicUrl } from "./supabase";
-// import { CompanyType, JobType, categoryJobType, optionType } from "@/types";
+import { CompanyType, JobType, categoryJobType, optionType } from "@/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -90,27 +90,71 @@ export const parsingJobs = async (
   );
 };
 
-// export const parsingCategoriesToOptions = (
-//   data: any,
-//   isLoading: boolean,
-//   error: any,
-//   isIndustry?: boolean
-// ) => {
-//   if (!isLoading && !error && data) {
-//     return data.map((item: any) => {
-//       return {
-//         id: isIndustry ? item.name : item.id,
-//         label: item.name,
-//       } as optionType;
-//     }) as optionType[];
-//   }
+export const parsingCompanies = async (
+  data: any,
+  isLoading: boolean,
+  error: any
+) => {
+  if (!isLoading && !error && data) {
+    return await Promise.all(
+      data.map(async (item: any) => {
+        let imageName = item.Companyoverview?.[0]?.image;
+        let imageUrl;
 
-//   return [];
-// };
+        if (imageName) {
+          imageUrl = await supabaseGetPublicUrl(imageName, "company");
+        } else {
+          imageUrl = "/images/company.png";
+        }
 
-// export const dateFormat = (
-//   date: Date | string,
-//   format: string = "DD MMM YYYY"
-// ) => {
-//   return dayjs(date).format(format);
-// };
+        const companyDetail = item.Companyoverview[0];
+
+        const company: CompanyType = {
+          id: item.id,
+          name: companyDetail?.name,
+          image: imageUrl,
+          dateFounded: companyDetail?.dateFounded,
+          description: companyDetail?.description,
+          employee: companyDetail?.employee,
+          industry: companyDetail?.industry,
+          location: companyDetail?.location,
+          techStack: companyDetail?.techStack,
+          website: companyDetail?.website,
+          sosmed: item.CompanySocialMedia[0],
+          teams: item.CompanyTeam,
+          totalJobs: item._count.Job,
+        };
+
+        return company;
+      })
+    );
+  }
+
+  return [];
+};
+
+
+export const parsingCategoriesToOptions = (
+  data: any,
+  isLoading: boolean,
+  error: any,
+  isIndustry?: boolean
+) => {
+  if (!isLoading && !error && data) {
+    return data.map((item: any) => {
+      return {
+        id: isIndustry ? item.name : item.id,
+        label: item.name,
+      } as optionType;
+    }) as optionType[];
+  }
+
+  return [];
+};
+
+export const dateFormat = (
+  date: Date | string,
+  format: string = "DD MMM YYYY"
+) => {
+  return dayjs(date).format(format);
+};
