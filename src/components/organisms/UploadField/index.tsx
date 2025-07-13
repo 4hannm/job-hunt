@@ -38,6 +38,7 @@ const UploadField: FC<UploadFieldProps> = ({ form }) => {
 				<FormField
 					control={form.control}
 					name="resume"
+					// eslint-disable-next-line @typescript-eslint/no-unused-vars
 					render={({ field }) => (
 						<FormItem>
 							<FormMessage className="mt-2" />

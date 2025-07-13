@@ -13,9 +13,7 @@ import React, { FC } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 
-interface FormSearchDynamicProps {}
-
-const FormSearchDynamic: FC<FormSearchDynamicProps> = ({}) => {
+const FormSearchDynamic: FC = ({}) => {
   return (
     <div className="mx-auto w-max">
       <div className="p-4 bg-background shadow-md inline-flex items-center gap-4 relative w-max z-10 text-center">

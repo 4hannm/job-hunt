@@ -19,9 +19,9 @@ import React, { FC } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-interface SignUpPageProps {}
 
-const SignUpPage: FC<SignUpPageProps> = ({}) => {
+
+const SignUpPage: FC = ({}) => {
   const form = useForm<z.infer<typeof formSignUpSchema>>({
     resolver: zodResolver(formSignUpSchema),
     defaultValues: {
@@ -49,7 +49,7 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
     	});
 
     	router.push("/signin");
-    } catch (error) {
+    } catch  {
     	toast({
     		title: "Error",
     		description: "Please try again",

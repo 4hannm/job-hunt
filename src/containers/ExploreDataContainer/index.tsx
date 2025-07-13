@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CompanyCard from "@/components/organisms/CompanyCard";
 import FormFilterDynamic from "@/components/organisms/FormFilterDynamic";
 import FormSearchDynamic from "@/components/organisms/FormSearchDynamic";
 import JobCard from "@/components/organisms/JobCard";
-import { JobType, filterFormType } from "@/types";
+import { filterFormType } from "@/types";
 import Image from "next/image";
 import React, { FC } from "react";
 
@@ -89,7 +90,7 @@ const ExploreDataContainer: FC<ExploreDataContainerProps> = ({
                   ) : (
                     <div className="grid grid-cols-3 gap-5">
                       {data?.map((item: any, i: number) => (
-                        <CompanyCard key={i} {...item}/>
+                        <CompanyCard key={i} {...item} />
                         // <CompanyCard key={i} {...item} />
                       ))}
                     </div>

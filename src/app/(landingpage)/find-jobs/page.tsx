@@ -1,6 +1,5 @@
 "use client";
 
-import { CATEGORIES_OPTIONS } from "@/constansts";
 import ExploreDataContainer from "@/containers/ExploreDataContainer";
 import useCategoryJobFilter from "@/hooks/useCategoryJobFilter";
 import useJobs from "@/hooks/useJobs";
@@ -22,7 +21,7 @@ export default function FindJobsPage() {
 
   const [categories, setCategories] = useState<string[]>([]);
 
-  const { jobs, isLoading, mutate } = useJobs(categories);
+  const { jobs, mutate } = useJobs(categories);
 
   const onSubmitFormFilter = async (val: z.infer<typeof formFilterSchema>) => {
     setCategories(val.categories);
@@ -30,7 +29,7 @@ export default function FindJobsPage() {
 
   useEffect(() => {
     mutate();
-  }, [categories]);
+  }, [categories,mutate]);
 
   return (
     <ExploreDataContainer

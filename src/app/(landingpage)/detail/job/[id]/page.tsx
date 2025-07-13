@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+/* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import FormModalApply from "@/components/organisms/FormModalApply";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -5,7 +8,6 @@ import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
-import React, { FC } from "react";
 import { BiCategory } from "react-icons/bi";
 import prisma from "../../../../../../lib/prisma";
 import { supabaseGetPublicUrl } from "@/lib/supabase";
@@ -110,11 +112,11 @@ const DetailJobPage = async ({ params }: { params: { id: string } }) => {
           <div className="inline-flex items-center gap-5">
             <Image
               src={
-                typeof image === "string" && image !== ""
-                  ? image
+                typeof Image === "string" && Image !== ""
+                  ? Image
                   : "/images/company.png"
               }
-              alt={typeof image === "string" ? image : "Company logo"}
+              alt={typeof Image === "string" ? Image : "Company logo"}
               width={48}
               height={48}
               className="rounded"
@@ -134,11 +136,16 @@ const DetailJobPage = async ({ params }: { params: { id: string } }) => {
                 </Button>
               ) : (
                 <FormModalApply
-                  image={data.image}
-                  roles={data.roles!!}
-                  jobType={data.jobType!!}
+                  image={
+                    typeof data.image === "string"
+                      ? data.image
+                      : data.image?.publicUrl
+                  }
+                  roles={data.roles!}
+                  jobType={data.jobType!}
                   location={data?.Company?.Companyoverview[0]?.location}
                   id={data.id}
+                  isApply={data.isApply ?? 0}
                 />
               )}
             </>
@@ -156,6 +163,7 @@ const DetailJobPage = async ({ params }: { params: { id: string } }) => {
             <div
               className="text-muted-foreground"
               dangerouslySetInnerHTML={{
+                 
                 __html: data?.description!!,
               }}
             ></div>
@@ -165,6 +173,7 @@ const DetailJobPage = async ({ params }: { params: { id: string } }) => {
             <div
               className="text-muted-foreground"
               dangerouslySetInnerHTML={{
+                 
                 __html: data?.responsibility!!,
               }}
             ></div>
@@ -175,7 +184,7 @@ const DetailJobPage = async ({ params }: { params: { id: string } }) => {
             <div
               className="text-muted-foreground"
               dangerouslySetInnerHTML={{
-                __html: data?.whoYouAre!!,
+                __html: data?.whoYouAre!,
               }}
             ></div>
           </div>
@@ -207,14 +216,12 @@ const DetailJobPage = async ({ params }: { params: { id: string } }) => {
             <div className="mt-6 space-y-4">
               <div className="flex flex-row justify-between">
                 <div className="text-gray-500">Apply Before</div>
-                <div className="font-semibold">
-                  {dateFormat(data.dueDate!!)}
-                </div>
+                <div className="font-semibold">{dateFormat(data.dueDate!)}</div>
               </div>
               <div className="flex flex-row justify-between">
                 <div className="text-gray-500">Job Posted On</div>
                 <div className="font-semibold">
-                  {dateFormat(data.datePosted!!)}
+                  {dateFormat(data.datePosted!)}
                 </div>
               </div>
               <div className="flex flex-row justify-between">

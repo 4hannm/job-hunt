@@ -1,20 +1,16 @@
 "use client";
 
-import { CATEGORIES_OPTIONS } from "@/constansts";
 import ExploreDataContainer from "@/containers/ExploreDataContainer";
 import useCategoryCompanyFilter from "@/hooks/useCategoryCompanyFilter";
 import useCompanies from "@/hooks/useCompanies";
 // import useCompanies from "@/hooks/useCompanies";
 import { formFilterCompanySchema } from "@/lib/form-schema";
-import { CompanyType } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-interface FindCompaniesPageProps {}
-
-const FindCompaniesPage: FC<FindCompaniesPageProps> = ({}) => {
+const FindCompaniesPage: FC = ({}) => {
   const formFilter = useForm<z.infer<typeof formFilterCompanySchema>>({
     resolver: zodResolver(formFilterCompanySchema),
     defaultValues: {
@@ -34,7 +30,7 @@ const FindCompaniesPage: FC<FindCompaniesPageProps> = ({}) => {
 
   useEffect(() => {
     mutate();
-  }, [categories]);
+  }, [categories,mutate]);
 
   return (
     <ExploreDataContainer

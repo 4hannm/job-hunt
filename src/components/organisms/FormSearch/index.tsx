@@ -11,9 +11,9 @@ import React, { FC } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
-interface FormSearchProps {}
 
-const FormSearch: FC<FormSearchProps> = ({}) => {
+
+const FormSearch: FC = ({}) => {
   return (
     <>
       <div className="mt-6 p-4 bg-background shadow-md inline-flex items-center gap-4 relative w-max z-10">

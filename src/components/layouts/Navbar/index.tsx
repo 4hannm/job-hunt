@@ -8,9 +8,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { FC } from "react";
 
-interface NavbarProps {}
+// interface NavbarProps {}
 
-const Navbar: FC<NavbarProps> = ({}) => {
+const Navbar: FC= ({}) => {
   const router = useRouter();
 
   const { data: session } = useSession();

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Accordion,
   AccordionContent,
@@ -44,7 +45,7 @@ const CheckboxForms: FC<CheckboxFormsProps> = ({
             name={name}
             render={() => (
               <FormItem className="space-y-5 text-gray-60 mt-5">
-                {items.map((item) => (
+                {items?.map((item) => (
                   <FormField
                     key={item.id}
                     control={formFilter.control}

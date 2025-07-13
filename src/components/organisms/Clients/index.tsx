@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { FC } from "react";
 
-interface ClientsProps {}
+// interface ClientsProps {}
 
 const clients = [
 	"/images/jobox.png",
@@ -11,7 +11,7 @@ const clients = [
 	"/images/bubles.png",
 ];
 
-const Clients: FC<ClientsProps> = ({}) => {
+const Clients: FC = ({}) => {
 	return (
 		<div className="relative z-10">
 			<div className="text-lg text-muted-foreground">

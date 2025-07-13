@@ -29,6 +29,7 @@ const useJobs = (filter?: string[]) => {
 
 	useEffect(() => {
 		parseJobs();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, isLoading, error]);
 
 	return {

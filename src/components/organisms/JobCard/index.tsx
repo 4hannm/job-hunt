@@ -7,11 +7,8 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useRouter } from "next/navigation";
-import Category from "../Category";
 
-interface JobCardProps extends JobType {}
-
-const JobCard: FC<JobCardProps> = ({
+const JobCard: FC<JobType> = ({
   applicants,
   skills,
   image,

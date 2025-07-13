@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
 
-interface FooterProps {}
+// interface FooterProps {}
 
 const aboutLinks = [
   "Companies",
@@ -23,14 +23,14 @@ const socialMediaImg = [
   "/images/soc-Dribbble.png",
 ];
 
-const Footer: FC<FooterProps> = ({}) => {
+const Footer: FC = ({}) => {
   return (
     <div className="bg-slate-900 px-32 pt-16 pb-11">
       <div className="flex flex-row items-start justify-between">
         <div>
           <Image
-            src="/images/logo.png"
-            alt="/images/logo.png"
+             src="/images/logo2.png"
+            alt="/images/logo2.png"
             width={160}
             height={36}
           />

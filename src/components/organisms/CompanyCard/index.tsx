@@ -4,9 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { FC } from "react";
 
-interface CompanyCardProps extends CompanyType {}
 
-const CompanyCard: FC<CompanyCardProps> = ({
+const CompanyCard: FC<CompanyType> = ({
   industry,
   description,
   image,

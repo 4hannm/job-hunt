@@ -2,9 +2,8 @@ import React, { FC } from "react";
 import Image from "next/image";
 import FormSearch from "../FormSearch";
 
-interface HeroProps {}
 
-const Hero: FC<HeroProps> = ({}) => {
+const Hero: FC = ({}) => {
   return (
     <div className="flex flex-row justify-between items-center">
       <div className="w-1/2">

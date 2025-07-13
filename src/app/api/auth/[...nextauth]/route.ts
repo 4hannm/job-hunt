@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
 				},
 				password: { label: "Password", type: "password" },
 			},
-			async authorize(credentials, req) {
+			async authorize(credentials, ) {
 				const user = await prisma.user.findFirst({
 					where: {
 						email: credentials?.email,
@@ -29,7 +29,8 @@ export const authOptions: NextAuthOptions = {
 				}
 
 				const isMatch = await comparePassword(
-					credentials?.password!!,
+					// eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+					credentials?.password!,
 					user.password
 				);
 

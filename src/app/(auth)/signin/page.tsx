@@ -20,9 +20,7 @@ import { signIn } from "next-auth/react";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
-interface SignInPageProps {}
-
-const SignInPage: FC<SignInPageProps> = ({}) => {
+const SignInPage: FC = ({}) => {
   const form = useForm<z.infer<typeof formSignInSchema>>({
     resolver: zodResolver(formSignInSchema),
     defaultValues: {
@@ -38,17 +36,17 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
   const onSubmit = async (val: z.infer<typeof formSignInSchema>) => {
     console.log(val);
     const authenticated = await signIn("credentials", {
-    	...val,
-    	redirect: false,
+      ...val,
+      redirect: false,
     });
 
     if (authenticated?.error) {
-    	toast({
-    		title: "Error",
-    		description: "Email or password maybe wrong",
-    	});
+      toast({
+        title: "Error",
+        description: "Email or password maybe wrong",
+      });
 
-    	return;
+      return;
     }
 
     router.push("/");

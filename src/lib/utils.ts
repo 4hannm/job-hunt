@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import dayjs from "dayjs";
@@ -10,18 +12,14 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const hashPassword = async (password: string) => {
-  const hashedPassword = await bcrypt.hash(password, 8);
-
-  return hashedPassword;
+  return await bcrypt.hash(password, 8);
 };
 
 export const comparePassword = async (
   password: string,
   hashedPassword: string
 ) => {
-  const isMatch = await bcrypt.compare(password, hashedPassword);
-
-  return isMatch;
+  return await bcrypt.compare(password, hashedPassword);
 };
 
 export async function fetcher<JSON = any>(
@@ -29,7 +27,6 @@ export async function fetcher<JSON = any>(
   init?: RequestInit
 ): Promise<JSON> {
   const res = await fetch(input, init);
-
   return res.json() as Promise<JSON>;
 }
 
@@ -39,15 +36,12 @@ export const parsingCategories = (
   error: any
 ) => {
   if (!isLoading && !error && data) {
-    return data.map((item: any) => {
-      return {
-        id: item.id,
-        name: item.name,
-        totalJobs: item._count.Job,
-      };
-    }) as categoryJobType[];
+    return data.map((item: any) => ({
+      id: item.id,
+      name: item.name,
+      totalJobs: item._count.Job,
+    })) as categoryJobType[];
   }
-
   return [];
 };
 
@@ -61,15 +55,17 @@ export const parsingJobs = async (
   return await Promise.all(
     data.map(async (item: any) => {
       let imageName = item.Company?.Companyoverview?.[0]?.image;
-      let imageUrl;
+      let imageUrl: string;
 
       if (imageName) {
-        imageUrl = await supabaseGetPublicUrl(imageName, "company");
+        const result = await supabaseGetPublicUrl(imageName, "company");
+        imageUrl =
+          typeof result === "string"
+            ? result
+            : result?.publicUrl || "/images/company.png";
       } else {
         imageUrl = "/images/company.png";
       }
-      console.log("Image URL:", imageUrl);
-
 
       const job: JobType = {
         id: item.id,
@@ -99,10 +95,14 @@ export const parsingCompanies = async (
     return await Promise.all(
       data.map(async (item: any) => {
         let imageName = item.Companyoverview?.[0]?.image;
-        let imageUrl;
+        let imageUrl: string;
 
         if (imageName) {
-          imageUrl = await supabaseGetPublicUrl(imageName, "company");
+          const result = await supabaseGetPublicUrl(imageName, "company");
+          imageUrl =
+            typeof result === "string"
+              ? result
+              : result?.publicUrl || "/images/company.png";
         } else {
           imageUrl = "/images/company.png";
         }
@@ -129,10 +129,8 @@ export const parsingCompanies = async (
       })
     );
   }
-
   return [];
 };
-
 
 export const parsingCategoriesToOptions = (
   data: any,
@@ -141,14 +139,11 @@ export const parsingCategoriesToOptions = (
   isIndustry?: boolean
 ) => {
   if (!isLoading && !error && data) {
-    return data.map((item: any) => {
-      return {
-        id: isIndustry ? item.name : item.id,
-        label: item.name,
-      } as optionType;
-    }) as optionType[];
+    return data.map((item: any) => ({
+      id: isIndustry ? item.name : item.id,
+      label: item.name,
+    })) as optionType[];
   }
-
   return [];
 };
 

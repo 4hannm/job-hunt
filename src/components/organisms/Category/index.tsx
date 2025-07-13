@@ -9,9 +9,9 @@ import CategoryItem from "./Categoryitem";
 import { fetcher, parsingCategories } from "@/lib/utils";
 import { categoryJobType } from "@/types";
 
-interface CategoryProps {}
+// interface CategoryProps {}
 
-const Category: FC<CategoryProps> = ({}) => {
+const Category: FC = ({}) => {
   const { data, isLoading, error } = useSWR("/api/jobs/categories", fetcher);
 
   const categories = useMemo(

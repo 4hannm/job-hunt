@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React, { FC } from "react";
 
-interface BannerSignUpProps {}
+// interface BannerSignUpProps {}
 
-const BannerSignUp: FC<BannerSignUpProps> = ({}) => {
+const BannerSignUp: FC= ({}) => {
 	return (
 		<div className="mt-32 mb-10 bg-primary text-primary-foreground px-16 pt-16 flex flex-row justify-between items-start">
 			<div>

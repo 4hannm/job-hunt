@@ -1,18 +1,13 @@
 "use client";
-
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import useSWR from "swr";
-
+import React, {FC} from "react";
 import TitleSection from "@/components/atoms/TitleSection";
 import JobItem from "./JobItem";
 import { JobType } from "@/types";
-import { fetcher, parsingJobs } from "@/lib/utils";
 import useFeaturedJobs from "@/hooks/useFeaturedJobs";
 
-interface FeaturedJobsProps {}
 
-const FeaturedJobs: FC<FeaturedJobsProps> = () => {
-  const { jobs, isLoading, error } = useFeaturedJobs();
+const FeaturedJobs: FC = () => {
+  const { jobs} = useFeaturedJobs();
 
   return (
     <div className="mt-32 mb-10">

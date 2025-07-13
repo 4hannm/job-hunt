@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form } from "@/components/ui/form";
 import { FC } from "react";
 import CheckboxForms from "./CheckboxForms";
