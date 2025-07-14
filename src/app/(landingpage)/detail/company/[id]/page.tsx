@@ -25,7 +25,7 @@ type params = {
 };
 
 interface DetailCompanyPageProps {
-  params: params;
+  params: Promise<params>;
 }
 
 async function getDetailCompany(id: string) {
@@ -60,9 +60,8 @@ async function getDetailCompany(id: string) {
   };
 }
 
-export default async function DetailCompanyPage({
-  params,
-}: DetailCompanyPageProps) {
+export default async function DetailCompanyPage(props: DetailCompanyPageProps) {
+  const params = await props.params;
   const data = await getDetailCompany(params.id);
 
   const companySocialMedia = data?.CompanySocialMedia ?? [];
