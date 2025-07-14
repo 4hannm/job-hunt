@@ -13,7 +13,7 @@ import prisma from "../../../../../../lib/prisma";
 import { supabaseGetPublicUrl } from "@/lib/supabase";
 import { dateFormat } from "@/lib/utils";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authoptions";
 
 async function getDetailJob(id: string) {
   const session = await getServerSession(authOptions);
@@ -164,7 +164,6 @@ const DetailJobPage = async (props: { params: Promise<{ id: string }> }) => {
             <div
               className="text-muted-foreground"
               dangerouslySetInnerHTML={{
-                 
                 __html: data?.description!!,
               }}
             ></div>
@@ -174,7 +173,6 @@ const DetailJobPage = async (props: { params: Promise<{ id: string }> }) => {
             <div
               className="text-muted-foreground"
               dangerouslySetInnerHTML={{
-                 
                 __html: data?.responsibility!!,
               }}
             ></div>
