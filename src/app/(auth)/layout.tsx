@@ -27,8 +27,8 @@ export default function AuthRootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} relative overflow-x-hidden`}>
-        <main className="grid grid-cols-2">
-          <div className="relative h-screen">
+        <main className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
+          <div className="relative hidden md:block">
             <div className="absolute w-full h-full">
               <Image
                 src="/images/bg-auth.png"

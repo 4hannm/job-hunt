@@ -9,9 +9,7 @@ import CategoryItem from "./Categoryitem";
 import { fetcher, parsingCategories } from "@/lib/utils";
 import { categoryJobType } from "@/types";
 
-// interface CategoryProps {}
-
-const Category: FC = ({}) => {
+const Category: FC = () => {
   const { data, isLoading, error } = useSWR("/api/jobs/categories", fetcher);
 
   const categories = useMemo(
@@ -20,9 +18,9 @@ const Category: FC = ({}) => {
   );
 
   return (
-    <div className="mt-32 mb-8">
+    <div className="mt-32 mb-8 px-4">
       <TitleSection word1="Explore by" word2="category" />
-      <div className="grid grid-cols-5 gap-9 mt-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mt-12">
         {categories.map((item: categoryJobType) => (
           <CategoryItem
             key={item.id}

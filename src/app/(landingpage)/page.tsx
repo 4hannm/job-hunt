@@ -8,20 +8,24 @@ import LatestJobs from "@/components/organisms/LatestJobs";
 
 export default function Home() {
   return (
-    <>
+    <div className="overflow-x-hidden">
       <div className="w-full h-screen absolute top-0 -z-10">
-        <Image src="/images/pattern.png" alt="/images/pattern.png" fill />
+        <Image
+          src="/images/pattern.png"
+          alt="/images/pattern.png"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
-      <div className="px-32 mb-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-32 mb-10">
         <Hero />
         <Clients />
         <Category />
         <BannerSignUp />
         <FeaturedJobs />
         <LatestJobs />
-      
-        
       </div>
-    </>
+    </div>
   );
 }

@@ -53,56 +53,60 @@ const SignInPage: FC = ({}) => {
   };
 
   return (
-    <div>
-      <div className="text-3xl text-center font-semibold mb-7">
-        Welcome Back, JobHunter
-      </div>
-
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter your email" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    type="password"
-                    placeholder="Enter your password"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button type="submit" className="w-full">
-            Sign In
-          </Button>
-
-          <div className="text-gray-500 text-sm mt-6">
-            Don`t have an account{" "}
-            <Link href="/signup" className="text-primary font-medium">
-              Sign Up
-            </Link>
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-white p-6 rounded-md shadow-md">
+        <div>
+          <div className="text-3xl text-center font-semibold mb-7">
+            Welcome Back, JobHunter
           </div>
-        </form>
-      </Form>
+
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="Enter your password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button type="submit" className="w-full">
+                Sign In
+              </Button>
+
+              <div className=" tezt-center text-gray-500 text-sm mt-6">
+                Don`t have an account{" "}
+                <Link href="/signup" className="text-primary font-medium">
+                  Sign Up
+                </Link>
+              </div>
+            </form>
+          </Form>
+        </div>
+      </div>
     </div>
   );
 };

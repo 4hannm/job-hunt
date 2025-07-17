@@ -15,19 +15,20 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 
 const FormSearchDynamic: FC = ({}) => {
   return (
-    <div className="mx-auto w-max">
-      <div className="p-4 bg-background shadow-md inline-flex items-center gap-4 relative w-max z-10 text-center">
-        <div className="inline-flex gap-3 items-center">
-          <AiOutlineSearch className="w-6 h-6" />
+    <div className="w-full flex flex-col items-center">
+      <div className="w-full max-w-6xl bg-background shadow-md p-4 flex flex-col lg:flex-row items-center gap-4 rounded-md">
+        <div className="flex w-full items-center gap-3">
+          <AiOutlineSearch className="w-6 h-6 text-muted-foreground" />
           <Input
-            className="py-5 w-[350px] border-none"
+            className="py-5 w-full border-none"
             placeholder="Job Title or keyword"
           />
         </div>
-        <div className="inline-flex gap-3 items-center">
-          <HiOutlineLocationMarker className="w-6 h-6" />
+
+        <div className="flex w-full items-center gap-3">
+          <HiOutlineLocationMarker className="w-6 h-6 text-muted-foreground" />
           <Select>
-            <SelectTrigger className="w-[350px] border-none text-gray-500 outline-none py-5">
+            <SelectTrigger className="w-full border-none text-gray-500 outline-none py-5">
               <SelectValue placeholder="Select a location" />
             </SelectTrigger>
             <SelectContent>
@@ -39,14 +40,12 @@ const FormSearchDynamic: FC = ({}) => {
             </SelectContent>
           </Select>
         </div>
-        <div>
-          <Button>Search</Button>
-        </div>
+
+        <Button className="w-full lg:w-auto py-5">Search</Button>
       </div>
-      <div>
-        <div className="text-muted-foreground mt-3">
-          Popular : UI Designer, UX Researcher, Android, Admin
-        </div>
+
+      <div className="text-muted-foreground mt-3 text-center">
+        Popular: UI Designer, UX Researcher, Android, Admin
       </div>
     </div>
   );

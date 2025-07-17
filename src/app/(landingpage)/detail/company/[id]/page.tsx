@@ -70,8 +70,8 @@ export default async function DetailCompanyPage(props: DetailCompanyPageProps) {
     <>
       {data && data.Companyoverview && (
         <>
-          <div className="bg-slate-100 px-32 pt-16 pb-14">
-            <div className="inline-flex gap-3 text-sm text-muted-foreground">
+          <div className="bg-slate-100 px-4 md:px-10 lg:px-32 pt-10 md:pt-16 pb-10 md:pb-14">
+            <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
               <Link className="hover:underline hover:text-black" href="/">
                 Home
               </Link>{" "}
@@ -91,85 +91,75 @@ export default async function DetailCompanyPage(props: DetailCompanyPageProps) {
               </Link>
             </div>
 
-            <div>
-              <div className="mt-10 inline-flex gap-6 items-start">
-                <Image
-                  src={
-                    typeof data.imageUrl === "string" && data.imageUrl !== ""
-                      ? data.imageUrl
-                      : "/images/company2.png"
-                  }
-                  alt={"Company logo"}
-                  width={48}
-                  height={48}
-                  className="rounded"
-                />
-                <div>
-                  <div className="inline-flex gap-4 items-center">
-                    <span className="text-4xl font-semibold">
-                      {data?.Companyoverview[0]?.name}
-                    </span>
-                    <Badge>{data._count?.Job} Jobs</Badge>
+            <div className="mt-10 flex flex-col md:flex-row gap-6 items-start">
+              <Image
+                src={
+                  typeof data.imageUrl === "string" && data.imageUrl !== ""
+                    ? data.imageUrl
+                    : "/images/company2.png"
+                }
+                alt="/images/company2.png"
+                width={48}
+                height={48}
+                className="rounded w-12 h-12 object-cover"
+              />
+              <div>
+                <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
+                  <span className="text-2xl md:text-4xl font-semibold">
+                    {data?.Companyoverview[0]?.name}
+                  </span>
+                  <Badge>{data._count?.Job} Jobs</Badge>
+                </div>
+                <div className="mt-2">
+                  <Link href="/" className="font-semibold text-primary">
+                    {data.Companyoverview[0].website}
+                  </Link>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-6 mt-6">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-white p-3 rounded-full">
+                      <AiOutlineFire className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-gray-500">Founded</div>
+                      <div className="font-semibold">
+                        {dateFormat(
+                          data.Companyoverview[0].dateFounded,
+                          "MMMM, DD YYYY"
+                        )}
+                      </div>
+                    </div>
                   </div>
-                  <div className="mt-2">
-                    <Link href="/" className="font-semibold text-primary">
-                      {data.Companyoverview[0].website}
-                    </Link>
+                  <div className="flex items-center gap-3">
+                    <div className="bg-white p-3 rounded-full">
+                      <BsPeople className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-gray-500">Employees</div>
+                      <div className="font-semibold">
+                        {data.Companyoverview[0].employee}
+                      </div>
+                    </div>
                   </div>
-                  <div className="inline-flex items-center gap-10 mt-6">
-                    <div className="inline-flex items-center gap-3">
-                      <div>
-                        <div className="bg-white p-3 rounded-full">
-                          <AiOutlineFire className="w-6 h-6 text-primary" />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-gray-500">Founded</div>
-                        <div className="font-semibold">
-                          {dateFormat(
-                            data.Companyoverview[0].dateFounded,
-                            "MMMM, DD YYYY"
-                          )}
-                        </div>
+                  <div className="flex items-center gap-3">
+                    <div className="bg-white p-3 rounded-full">
+                      <HiOutlineLocationMarker className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-gray-500">Location</div>
+                      <div className="font-semibold">
+                        {data.Companyoverview[0].location}
                       </div>
                     </div>
-                    <div className="inline-flex items-center gap-3">
-                      <div>
-                        <div className="bg-white p-3 rounded-full">
-                          <BsPeople className="w-6 h-6 text-primary" />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-gray-500">Employees</div>
-                        <div className="font-semibold">
-                          {data.Companyoverview[0].employee}
-                        </div>
-                      </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="bg-white p-3 rounded-full">
+                      <HiOutlineOfficeBuilding className="w-6 h-6 text-primary" />
                     </div>
-                    <div className="inline-flex items-center gap-3">
-                      <div>
-                        <div className="bg-white p-3 rounded-full">
-                          <HiOutlineLocationMarker className="w-6 h-6 text-primary" />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-gray-500">Location</div>
-                        <div className="font-semibold">
-                          {data.Companyoverview[0].location}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="inline-flex items-center gap-3">
-                      <div>
-                        <div className="bg-white p-3 rounded-full">
-                          <HiOutlineOfficeBuilding className="w-6 h-6 text-primary" />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-gray-500">Industry</div>
-                        <div className="font-semibold">
-                          {data.Companyoverview[0].industry}
-                        </div>
+                    <div>
+                      <div className="text-gray-500">Industry</div>
+                      <div className="font-semibold">
+                        {data.Companyoverview[0].industry}
                       </div>
                     </div>
                   </div>
@@ -177,10 +167,11 @@ export default async function DetailCompanyPage(props: DetailCompanyPageProps) {
               </div>
             </div>
           </div>
-          <div className="px-32 py-16 flex flex-row items-start gap-10">
-            <div className="w-3/4">
+
+          <div className="px-4 md:px-10 lg:px-32 py-10 flex flex-col lg:flex-row items-start gap-10">
+            <div className="w-full lg:w-3/4">
               <div className="mb-16">
-                <div className="text-3xl font-semibold mb-3">
+                <div className="text-2xl md:text-3xl font-semibold mb-3">
                   Company Profile
                 </div>
                 <div
@@ -192,8 +183,10 @@ export default async function DetailCompanyPage(props: DetailCompanyPageProps) {
               </div>
               {companySocialMedia.length > 0 && (
                 <div>
-                  <div className="text-3xl font-semibold mb-4">Contact</div>
-                  <div className="flex items-center gap-5 w-[400px] flex-wrap">
+                  <div className="text-2xl md:text-3xl font-semibold mb-4">
+                    Contact
+                  </div>
+                  <div className="flex items-center gap-5 flex-wrap">
                     {companySocialMedia[0]?.facebook && (
                       <div className="p-2 border border-primary text-primary w-max inline-flex items-center gap-3 font-semibold">
                         <FacebookIcon />
@@ -222,8 +215,10 @@ export default async function DetailCompanyPage(props: DetailCompanyPageProps) {
                 </div>
               )}
             </div>
-            <div className="w-1/4">
-              <div className="text-3xl font-semibold mb-4">Tech Stack</div>
+            <div className="w-full lg:w-1/4">
+              <div className="text-2xl md:text-3xl font-semibold mb-4">
+                Tech Stack
+              </div>
               <div className="text-gray-500 text-sm">
                 Learn about the technology and tools that Pattern uses.
               </div>
@@ -236,12 +231,15 @@ export default async function DetailCompanyPage(props: DetailCompanyPageProps) {
               </div>
             </div>
           </div>
+
           {data.CompanyTeam && (
-            <div className="px-32">
+            <div className="px-4 md:px-10 lg:px-32">
               <Separator />
               <div className="my-16">
-                <div className="text-3xl font-semibold mb-4">Teams</div>
-                <div className="grid grid-cols-5 gap-5 mt-5">
+                <div className="text-2xl md:text-3xl font-semibold mb-4">
+                  Teams
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-5">
                   {data.CompanyTeam.map((data: CompanyTeam) => (
                     <div
                       key={data.id}
@@ -271,7 +269,7 @@ export default async function DetailCompanyPage(props: DetailCompanyPageProps) {
           )}
         </>
       )}
-      <div className="px-32">
+      <div className="px-4 md:px-10 lg:px-32">
         <LatestJobs />
       </div>
     </>
